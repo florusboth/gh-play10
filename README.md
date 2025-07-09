@@ -34,3 +34,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## My Notes
+
+```bash
+npm i
+npm run lint
+npm run typecheck
+npm run format
+npm run test
+npm run test:e2e
+# npx playwright install --with-deps
+sudo apt-get install libgtk2.0-0t64 libgtk-3-0t64 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth xvfb
+npx playwright install
+npm run test:e2e
+npm i next@latest react@latest react-dom@latest
+npm run build
+npm run test:e2e
+npx playwright install
+sudo apt-get install libflite1
+npx playwright install
+npm run test:e2e
+```
