@@ -52,7 +52,18 @@ jobs:
           if: always()
           uses: slackapi/slack-github-action@v1.22.0
           with:
-            payload: "./.github/slack/test-failure-slack-payload.json"
+            payload: |
+                {
+                "blocks": [
+                    {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "🛑 *<https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}|${{ github.workflow }} workflow run>* failed."
+                    }
+                    }
+                ]
+                }
           env:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
