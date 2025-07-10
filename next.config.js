@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   // Enable standalone output for Docker deployment
-  output: 'standalone',
+  output: "standalone",
 };
 
 module.exports = nextConfig;
