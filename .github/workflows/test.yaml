@@ -32,13 +32,18 @@ jobs:
         run: npm run build
         env:
           FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
+      - name: show folder information
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Files in current directory:"
+          ls -la
+          echo "Files in .next directory:"
+          ls -la .next
       #- uses: christopherhx/gitea-upload-artifact@v4
       - uses: actions/upload-artifact@v4
         with:
           name: build
           path: .next/
-        env:
-          FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
       - name: Run Unit Tests
         run: npm run test
       #- uses: christopherhx/gitea-upload-artifact@v4
