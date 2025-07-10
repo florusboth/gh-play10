@@ -1,6 +1,7 @@
+name: Deploy
+
 permissions:
   contents: read
-name: Deploy
 on:
   workflow_call:
     inputs:
@@ -59,3 +60,6 @@ jobs:
         run: npm run build
         env:
           FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
+      - name: Deploy to server
+        run: |
+          echo "Deploying to server..."
