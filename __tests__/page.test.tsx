@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 
 jest.mock("../src/utils/flagsmith", () => {
   return {
-    getEnvironmentFlags: jest.fn(() => 
+    getEnvironmentFlags: jest.fn(() =>
       Promise.resolve({
         isFeatureEnabled: () => {
           return true;
@@ -15,7 +15,7 @@ jest.mock("../src/utils/flagsmith", () => {
 });
 
 describe("Home", () => {
-  it("renders a heading", async() => {
+  it("renders a heading", async () => {
     render(await Home());
 
     const docH = screen.getByRole("heading", {
