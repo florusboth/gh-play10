@@ -1,0 +1,65 @@
+name: Deploy
+
+permissions:
+  contents: read
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "The environment to deploy to"
+        required: true
+        default: "staging"
+        type: string
+      github-environment:
+        description: "The GitHub environment to deploy to"
+        required: true
+        default: "staging"
+        type: string
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "The environment to deploy to"
+        required: true
+        default: "staging"
+        type: string
+      github-environment:
+        description: "The GitHub environment to deploy to"
+        required: true
+        default: "staging"
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.environment }}-${{ inputs.github-environment }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.github-environment }}
+    steps:
+      - name: Avoid deploying to production for non production environments
+        if: ${{ inputs.environment == 'production' }} && ${{ inputs.github-environment != 'production' }}
+        run: |
+          echo "::error::Cannot deploy to production using a non production environment."
+          exit 1
+      - name: Init login into deploy server
+        run: |
+          echo "Logging into deploy server..."
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER }} >> ~/.ssh/known_hosts
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" | tr -d '\r' | base64 --decode > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - name: Build App
+        run: npm run build
+        env:
+          FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
+      - name: Deploy to server
+        run: |
+          echo "Deploying to server..."
