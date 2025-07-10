@@ -95,3 +95,6 @@ jobs:
           tags: |
             ghcr.io/user/app:latest
             ghcr.io/user/app:1.0.0
+          secrets: |
+            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+            FLAGSMITH_KEY=${{ secrets.FLAGSMITH_KEY }}
