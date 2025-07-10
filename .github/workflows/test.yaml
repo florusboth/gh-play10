@@ -23,13 +23,15 @@ jobs:
           run: npm run typecheck
         - name: Build the project
           run: npm run build
-        - uses: christopherhx/gitea-upload-artifact@v4
+        #- uses: christopherhx/gitea-upload-artifact@v4
+        - uses: actions/upload-artifact@v4
           with:
             name: build
             path: .next/
         - name: Run Unit Tests
           run: npm run test
-        - uses: christopherhx/gitea-upload-artifact@v4
+        #- uses: christopherhx/gitea-upload-artifact@v4
+        - uses: actions/upload-artifact@v4
           if: always()
           with:
             name: coverage
@@ -43,7 +45,8 @@ jobs:
           run: npx playwright install --with-deps
         - name: Run E2E Tests
           run: npm run test:e2e
-        - uses: christopherhx/gitea-upload-artifact@v4
+        #- uses: christopherhx/gitea-upload-artifact@v4
+        - uses: actions/upload-artifact@v4
           if: always()
           with:
             name: e2e
