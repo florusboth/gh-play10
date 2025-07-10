@@ -30,6 +30,8 @@ jobs:
         run: npm run typecheck
       - name: Build the project
         run: npm run build
+        env:
+          FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
       #- uses: christopherhx/gitea-upload-artifact@v4
       - uses: actions/upload-artifact@v4
         with:
