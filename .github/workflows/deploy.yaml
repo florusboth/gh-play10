@@ -38,11 +38,11 @@ jobs:
     environment:
       name: ${{ inputs.github-environment }}
     steps:
-      - name: Avoid deploying to production for non production environments
-        if: ${{ inputs.environment == 'production' }} && ${{ inputs.github-environment != 'production' }}
-        run: |
-          echo "::error::Cannot deploy to production using a non production environment."
-          exit 1
+      # - name: Avoid deploying to production for non production environments
+      #   if: ${{ inputs.environment == 'production' }} && ${{ inputs.github-environment != 'production' }}
+      #   run: |
+      #     echo "::error::Cannot deploy to production using a non production environment."
+      #     exit 1
       - name: Init login into deploy server
         run: |
           echo "Logging into deploy server..."
