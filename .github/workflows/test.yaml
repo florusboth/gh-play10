@@ -28,6 +28,8 @@ jobs:
         with:
           name: build
           path: .next/
+        env:
+          FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}          
       - name: Run Unit Tests
         run: npm run test
       #- uses: christopherhx/gitea-upload-artifact@v4
