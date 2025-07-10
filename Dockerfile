@@ -26,7 +26,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
 
 # Install all dependencies (including devDependencies for build)
-RUN npm ci
+RUN npm ci --include=dev
 
 # Build the application
 RUN npm run build
