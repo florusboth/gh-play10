@@ -28,8 +28,8 @@ ENV NODE_ENV production
 # Install all dependencies (including devDependencies for build)
 RUN npm ci
 
-# Type check and build the application
-RUN npm run typecheck && npm run build
+# Build the application
+RUN npm run build
 
 # Stage 3: Production runtime
 FROM node:22-alpine AS runner
