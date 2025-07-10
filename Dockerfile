@@ -5,7 +5,7 @@ FROM node:22-alpine AS deps
 RUN apk add --no-cache libc6-compat
 
 # get secrets from github
-RUN --mount=type=secret,id=FLAGSMITH_KEY,env=FLAGSMITH_KEY
+#RUN --mount=type=secret,id=FLAGSMITH_KEY,env=FLAGSMITH_KEY
 
 WORKDIR /app
 
@@ -32,7 +32,7 @@ ENV NODE_ENV production
 RUN npm ci --include=dev
 
 # Build the application
-RUN export FLAGSMITH_KEY=$(cat /run/secrets/FLAGSMITH_KEY) && npm run build
+RUN --mount=type=secret,id=FLAGSMITH_KEY,env=FLAGSMITH_KEY npm run build
 
 # Stage 3: Production runtime
 FROM node:22-alpine AS runner
