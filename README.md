@@ -1,4 +1,7 @@
 [![codecov](https://codecov.io/github/florusboth/gh-play10/graph/badge.svg?token=JHXKTYNLN5)](https://codecov.io/github/florusboth/gh-play10)
+[![CodeQL](https://github.com/florusboth/gh-play10/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/florusboth/gh-play10/actions/workflows/github-code-scanning/codeql)
+[![CI](https://github.com/florusboth/gh-play10/actions/workflows/ci.yaml/badge.svg)](https://github.com/florusboth/gh-play10/actions/workflows/ci.yaml)
+[![Deploy](https://github.com/florusboth/gh-play10/actions/workflows/deploy.yaml/badge.svg)](https://github.com/florusboth/gh-play10/actions/workflows/deploy.yaml)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
