@@ -1,0 +1,10 @@
+name: Dev Branch Test
+on:
+  push:
+    branches:
+      - "dev/**"
+
+jobs:
+  run-tests:
+    uses: ./.github/workflows/test.yaml
+    secrets: inherit
