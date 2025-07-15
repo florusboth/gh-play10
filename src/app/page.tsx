@@ -1,6 +1,6 @@
 import Link from "next/link";
 import flagsmith from "@/utils/flagsmith";
-import '@testing-library/jest-dom/jest-globals';
+import "@testing-library/jest-dom/jest-globals";
 
 export const revalidate = 0;
 
