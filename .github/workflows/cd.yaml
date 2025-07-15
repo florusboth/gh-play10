@@ -94,12 +94,12 @@ jobs:
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
     with:
-      yeetta-env: ${{vars.YEETTA_STAGING_ENV}}
-      github-env: "staging"
+      environment: ${{vars.YEETTA_STAGING_ENV}}
+      github-environment: "staging"
   deploy-to-production:
     needs: run-tests
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
     with:
-      yeetta-env: ${{vars.YEETTA_PRODUCTION_ENV}}
-      github-env: "production"
+      environment: ${{vars.YEETTA_PRODUCTION_ENV}}
+      github-environment: "production"
