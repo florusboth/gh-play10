@@ -28,7 +28,7 @@ jobs:
             console.log(response.data)
             return response.data.head.ref
       - name: Trigger a Branch Deploy
-        uses: actions/github-script@v7
+        uses: actions/github-script@v6
         with:
           script: |
             const response = await github.rest.actions.createWorkflowDispatch({
