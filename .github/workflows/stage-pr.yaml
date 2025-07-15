@@ -3,6 +3,11 @@ on:
   issue_comment:
     types: [created]
 
+permissions:
+  pull-requests: write
+  contents: write
+  issues: read
+
 jobs:
   trigger-pr-branch-deploy:
     runs-on: ubuntu-latest
