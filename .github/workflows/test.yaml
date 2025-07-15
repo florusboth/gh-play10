@@ -38,13 +38,6 @@ jobs:
         run: npm run lint
       - name: Check for type errors
         run: npm run typecheck
-      - name: some info
-        continue-on-error: true
-        run: |
-          echo "FS key: $FLAGSMITH_KEY"
-          echo "FS env key: $env.FLAGSMITH_KEY"
-          echo "GITHUB Env : $GITHUB_ENV"
-          echo "GITHUB env content: $(env|sort)"
       - name: Build the project
         run: npm run build
       - name: show folder information
