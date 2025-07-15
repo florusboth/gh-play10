@@ -100,3 +100,59 @@ jobs:
           secrets: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
             FLAGSMITH_KEY=${{ secrets.FLAGSMITH_KEY }}
+      - name: Deploy to server
+        run: |
+          echo "Deploying to server..."
+          ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} << 'EOF'
+          cd deployments/gh-play10
+          #docker pull ghcr.io/${{ vars.MY_ORG }}/gh-play10:latest
+          #docker-compose down
+          #docker-compose up -d --build
+          docker run -d --rm --name gh-play10 \
+            -p 3000:3000 \
+            -e FLAGSMITH_KEY=${{ secrets.FLAGSMITH_KEY }} \
+            ghcr.io/${{ vars.MY_ORG }}/gh-play10:latest
+          EOF
+      - name: Notify deployment success
+        run: |
+          echo "Deployment to ${{ inputs.environment }} environment successful!"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "GitHub Environment: ${{ inputs.github-environment }}"
+          echo "Deployed to server: ${{ secrets.DEPLOY_SERVER }}"
+          echo "Deployed by: ${{ github.actor }}"
+          echo "Deployment time: $(date)"
+      - name: Notify deployment failure
+        if: failure()
+        run: |
+          echo "Deployment to ${{ inputs.environment }} environment failed!"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "GitHub Environment: ${{ inputs.github-environment }}"
+          echo "Deployed to server: ${{ secrets.DEPLOY_SERVER }}"
+          echo "Deployed by: ${{ github.actor }}"
+          echo "Deployment time: $(date)"
+          exit 1
+      - name: Clean up
+        run: |
+          echo "Cleaning up..."
+          rm -rf ~/.ssh/id_rsa
+          echo "Clean up complete."
+        if: always()
+      - name: Notify Slack on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.22.0
+        with:
+          payload: |
+            {
+            "blocks": [
+                {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "🛑  *<https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}|${{ github.workflow }} workflow run>* failed."
+                }
+              }
+            ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
