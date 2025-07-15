@@ -1,0 +1,58 @@
+# Workflow to run for chore branches
+name: Chore
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  push:
+    branches:
+      - "chore/**"
+
+jobs:
+  test-and-build:
+    strategy:
+      matrix:
+        node-version: ["22", "24"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Check for formatting errors
+        run: npm run format
+      - name: Check for ESlint errors
+        run: npm run lint
+      - name: Check for type errors
+        run: npm run typecheck
+      - name: Build the project
+        run: npm run build
+        env:
+          FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
+      - name: Run Unit Tests
+        run: npm run test
+      - name: Send to Slack
+        if: failure()
+        uses: slackapi/slack-github-action@v1.22.0
+        with:
+          payload: |
+            {
+            "blocks": [
+                {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "🛑 *<https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}|${{ github.workflow }} workflow run>* failed."
+                }
+              }
+            ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
