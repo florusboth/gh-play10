@@ -14,7 +14,7 @@ jobs:
         node-version: ["22", "24"]
     runs-on: ubuntu-latest
     env:
-      FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}    
+      FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
