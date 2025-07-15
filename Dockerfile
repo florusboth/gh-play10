@@ -39,8 +39,8 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 
 # Create a non-root user for security
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs \
+&& adduser --system --uid 1001 nextjs
 
 # Set environment variables
 ENV NODE_ENV production
@@ -50,8 +50,8 @@ ENV NEXT_TELEMETRY_DISABLED 1
 COPY --from=builder /app/public ./public
 
 # Set correct permissions for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+RUN mkdir .next \
+&& chown nextjs:nodejs .next
 
 # Copy built Next.js application
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
