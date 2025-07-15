@@ -38,13 +38,13 @@ jobs:
         run: npm run lint
       - name: Check for type errors
         run: npm run typecheck
-      - name: Build the project
-        run: npm run build
       - name: some info
         run: |
           echo "FS key: $FLAGSMITH_KEY"
           echo "FS env key: $(env.FLAGSMITH_KEY)"
           echo "GITHUB Env : $GITHUB_ENV"
+      - name: Build the project
+        run: npm run build
       - name: show folder information
         run: |
           echo "Current directory: $(pwd)"
