@@ -16,7 +16,7 @@ jobs:
   create-version-pr-or-release:
     runs-on: ubuntu-latest
     outputs:
-      should-deploy: ${{steps.changesets.outputs.hasChangesets == 'false'}}    
+      should-deploy: ${{steps.changesets.outputs.hasChangesets == 'false'}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -102,4 +102,4 @@ jobs:
     secrets: inherit
     with:
       yeetta-env: ${{vars.YEETTA_PRODUCTION_ENV}}
-      github-env: "production"          
+      github-env: "production"
