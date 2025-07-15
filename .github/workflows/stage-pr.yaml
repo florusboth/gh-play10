@@ -3,14 +3,11 @@ on:
   issue_comment:
     types: [created]
 
-permissions:
-  pull-requests: write
-  contents: write
-  issues: read
 
 jobs:
   trigger-pr-branch-deploy:
     runs-on: ubuntu-latest
+    permissions: write-all    
     if: github.event.issue.pull_request && github.event.issue.state == 'open' && github.event.comment.body == '/deploy'
     steps:
       - name: Get Pull Request Head Ref
