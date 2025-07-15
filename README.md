@@ -61,3 +61,14 @@ sudo apt-get install libflite1
 npx playwright install
 npm run test:e2e
 ```
+
+## Changesets
+
+Create a new branch.
+When finished, run
+
+```bash
+npx changeset
+```
+
+Push the branch.
