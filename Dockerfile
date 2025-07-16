@@ -13,7 +13,7 @@ WORKDIR /app
 COPY package.json package-lock.json* .husky ./
 
 # Install dependencies using npm ci for production builds
-RUN npm ci --only=production && npm cache clean --force
+RUN npm ci --only=production --ignore-scripts && npm cache clean --force
 
 # Stage 2: Build the application
 FROM node:22-alpine AS builder
