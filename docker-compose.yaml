@@ -1,0 +1,20 @@
+---
+services:
+  app:
+    image: ghcr.io/${MY_ORG}/gh-play10:latest
+    restart: unless-stopped
+    ports:
+      - "55001:80"
+    environment:
+      VIRTUAL_HOST: ${HOST_DOMAIN}
+    volumes:
+      - app-mydb:/app/App_Data
+    networks:
+      - frontend
+
+volumes:
+  app-mydb:
+
+networks:
+  frontend:
+    external: true
