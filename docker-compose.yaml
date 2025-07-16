@@ -4,7 +4,7 @@ services:
     image: ghcr.io/${MY_ORG}/gh-play10:latest
     restart: unless-stopped
     ports:
-      - "55001:80"
+      - "${PORT}:80"
     environment:
       VIRTUAL_HOST: ${HOST_DOMAIN}
     volumes:
