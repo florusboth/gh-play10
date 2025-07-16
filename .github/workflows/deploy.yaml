@@ -139,10 +139,10 @@ jobs:
       - name: Deploy to server
         run: |
           echo "Deploying to server..."
-          scp -o StrictHostKeyChecking=no  .env docker-compose.prod.yaml docker-compose.yaml ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:deployments/gh-play10/
+          scp -o StrictHostKeyChecking=no  .env docker-compose.prod.yaml docker-compose.yaml ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SERVER }}:deployments/gh-play10/
       - name: Start container using docker compose
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} "cd deployments/gh-play10 && docker-compose -f docker-compose.yaml up -d --remove-orphans"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SERVER }} "cd deployments/gh-play10 && docker-compose -f docker-compose.yaml up -d --remove-orphans"
       - name: Notify deployment success
         run: |
           echo "Deployment to ${{ inputs.environment }} environment successful!"
