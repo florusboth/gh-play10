@@ -10,7 +10,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Copy package files for dependency installation
-COPY package.json package-lock.json* ./
+COPY package.json package-lock.json* .husky ./
 
 # Install dependencies using npm ci for production builds
 RUN npm ci --only=production && npm cache clean --force
