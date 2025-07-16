@@ -17,6 +17,14 @@ jobs:
       - name: Get ENV Name
         id: get-env-name
         run: echo "env_name=gh-play10-pr-${{ github.event.issue.number || github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+      - name: Init login into deploy server
+        run: |
+          echo "Logging into deploy server..."
+          mkdir ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER }} >> ~/.ssh/known_hosts
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" | tr -d '\r' | base64 --decode > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
       - name: Check if Environment Exists
         id: check-env
         run: |
