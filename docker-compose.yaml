@@ -12,9 +12,8 @@ services:
       - frontend
 
 volumes:
-    app-mydb:
+  app-mydb:
 
 networks:
   frontend:
     external: true
-      

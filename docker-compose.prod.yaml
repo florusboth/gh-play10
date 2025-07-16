@@ -1,13 +1,13 @@
 ---
 services:
-    app:
-        image: ghcr.io/${IMAGE_REPO}:${RELEASE_VERSION}
-        restart: always
-        container_name: ${IMAGE_REPO}-app
-        environment:
-            VIRTUAL_HOST: ${HOST_DOMAIN}
-        volumes:
-            - app-mydb:/app/App_Data
+  app:
+    image: ghcr.io/${IMAGE_REPO}:${RELEASE_VERSION}
+    restart: always
+    container_name: ${IMAGE_REPO}-app
+    environment:
+      VIRTUAL_HOST: ${HOST_DOMAIN}
+    volumes:
+      - app-mydb:/app/App_Data
 
 networks:
   default:
@@ -15,4 +15,4 @@ networks:
     name: frontend
 
 volumes:
-    app-mydb:
+  app-mydb:
