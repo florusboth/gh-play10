@@ -1,6 +1,7 @@
 ---
 services:
   app:
+    image: ghcr.io/${{ vars.MY_ORG }}/gh-play10:latest
     restart: unless-stopped
     ports:
       - "55001:80"
