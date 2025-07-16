@@ -11,7 +11,8 @@
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
     "test": "jest --coverage",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "prepare": "husky"
   },
   "dependencies": {
     "@changesets/cli": "^2.26.2",
@@ -34,6 +35,7 @@
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^30.0.0",
     "globals": "^16.3.0",
+    "husky": "^9.1.7",
     "jest": "^30.0.4",
     "jest-environment-jsdom": "^30.0.4",
     "prettier": "^3.6.2"
