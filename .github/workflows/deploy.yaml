@@ -170,7 +170,7 @@ jobs:
         if: always()
       - name: Notify Slack on failure
         if: failure()
-        uses: slackapi/slack-github-action@v1.22.0
+        uses: slackapi/slack-github-action@v2
         with:
           payload: |
             {
