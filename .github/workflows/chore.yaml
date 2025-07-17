@@ -39,7 +39,7 @@ jobs:
         run: npm run test
       - name: Send to Slack
         if: failure()
-        uses: slackapi/slack-github-action@v1.22.0
+        uses: slackapi/slack-github-action@v2
         with:
           payload: |
             {
