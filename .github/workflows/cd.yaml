@@ -31,7 +31,7 @@ jobs:
         run: npm ci
       - name: Create version PR or GH release
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v1.5.3
         with:
           publish: npx changeset tag
         env:
